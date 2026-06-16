@@ -52,9 +52,10 @@ export default function CoverLetterSection({
       {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
 
       {latest ? (
-        <pre className="mt-4 whitespace-pre-wrap rounded-md bg-zinc-50 p-4 text-sm text-zinc-800">
-          {latest.content}
-        </pre>
+        <div
+          className="prose prose-sm mt-4 max-w-none rounded-md bg-zinc-50 p-4 text-zinc-800"
+          dangerouslySetInnerHTML={{ __html: latest.content }}
+        />
       ) : (
         <p className="mt-3 text-sm text-zinc-500">
           No cover letter yet. Make sure your base profile is filled in, then
