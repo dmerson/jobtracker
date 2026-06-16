@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { updateProfile } from "@/lib/actions/profile";
 import { redirect } from "next/navigation";
+import RichTextEditor from "@/components/RichTextEditor";
 
 export default async function ProfilePage() {
   const supabase = await createClient();
@@ -38,12 +39,11 @@ export default async function ProfilePage() {
           <label className="block text-sm font-medium text-zinc-700">
             Professional Summary
           </label>
-          <textarea
+          <RichTextEditor
             name="summary"
-            rows={4}
             defaultValue={profile?.summary ?? ""}
-            className="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 text-sm"
             placeholder="A short summary of your experience and goals..."
+            minHeight="6rem"
           />
         </div>
 
@@ -64,12 +64,11 @@ export default async function ProfilePage() {
           <label className="block text-sm font-medium text-zinc-700">
             Base Resume Content
           </label>
-          <textarea
+          <RichTextEditor
             name="base_resume_content"
-            rows={16}
             defaultValue={profile?.base_resume_content ?? ""}
-            className="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 font-mono text-sm"
-            placeholder="Paste your full resume content here (work history, education, etc). This is the starting point copied into each job-specific resume."
+            placeholder="Paste your full resume content here — links, bold text, and formatting will be preserved."
+            minHeight="20rem"
           />
         </div>
 

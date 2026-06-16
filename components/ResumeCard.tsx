@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { updateResumeContent, deleteResume } from "@/lib/actions/resumes";
+import RichTextEditor from "@/components/RichTextEditor";
 import type { Resume } from "@/lib/types";
 
 export default function ResumeCard({
@@ -51,11 +52,11 @@ export default function ResumeCard({
           defaultValue={resume.title}
           className="w-full rounded-md border border-zinc-300 px-3 py-1.5 text-sm font-medium"
         />
-        <textarea
+        <RichTextEditor
           name="content"
           defaultValue={resume.content}
-          rows={10}
-          className="w-full rounded-md border border-zinc-300 px-3 py-2 font-mono text-sm"
+          placeholder="Paste or edit your resume content here — links and formatting are preserved."
+          minHeight="16rem"
         />
         <div className="flex items-center gap-2">
           <button
