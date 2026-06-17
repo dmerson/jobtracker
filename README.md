@@ -1,4 +1,18 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Job Tracker
+
+A personal job application tracker built with Next.js, Supabase, and the Anthropic Claude API. Track applications, log interview notes, and generate tailored cover letters and resumes with AI.
+
+## Environment Variables
+
+Copy `.env.local.example` to `.env.local` and fill in the three values before running locally. The same variables must be added to your Vercel project under **Settings → Environment Variables** before deploying.
+
+| Variable | Where to find it |
+|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase dashboard → Project Settings → API → Project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase dashboard → Project Settings → API → `anon public` key |
+| `ANTHROPIC_API_KEY` | [console.anthropic.com](https://console.anthropic.com) → API Keys |
+
+Google OAuth is configured inside Supabase (Authentication → Providers → Google) — no extra environment variable is needed in this app for it. See `DEPLOYMENT.md` for the full step-by-step setup guide.
 
 ## Getting Started
 
