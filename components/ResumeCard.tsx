@@ -45,12 +45,12 @@ export default function ResumeCard({
   };
 
   return (
-    <div className="rounded-md border border-zinc-200 p-4">
-      <form action={update} className="space-y-2">
+    <div className="rounded-lg border border-black/10 bg-[#F3F2EF] p-4">
+      <form action={update} className="space-y-3">
         <input
           name="title"
           defaultValue={resume.title}
-          className="w-full rounded-md border border-zinc-300 px-3 py-1.5 text-sm font-medium"
+          className="li-input bg-white font-semibold"
         />
         <RichTextEditor
           name="content"
@@ -58,35 +58,32 @@ export default function ResumeCard({
           placeholder="Paste or edit your resume content here — links and formatting are preserved."
           minHeight="16rem"
         />
-        <div className="flex items-center gap-2">
-          <button
-            type="submit"
-            className="rounded-md border border-zinc-300 px-3 py-1.5 text-sm font-medium text-zinc-700 hover:bg-zinc-50"
-          >
+        <div className="flex flex-wrap items-center gap-2 pt-1">
+          <button type="submit" className="li-btn li-btn-secondary text-xs px-3 py-1">
             Save
           </button>
           <button
             type="button"
             onClick={generatePdf}
             disabled={generating}
-            className="rounded-md bg-zinc-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-zinc-700 disabled:opacity-50"
+            className="li-btn li-btn-primary text-xs px-3 py-1 disabled:opacity-50"
           >
-            {generating ? "Generating PDF..." : "Generate PDF"}
+            {generating ? "Generating PDF…" : "Generate PDF"}
           </button>
           {(pdfUrl || resume.pdf_path) && (
             <a
               href={pdfUrl ?? `/api/resume-pdf/${resume.id}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-blue-600 hover:underline"
+              className="text-xs font-semibold text-[#0A66C2] hover:underline"
             >
-              View PDF
+              View PDF ↗
             </a>
           )}
           <button
             type="button"
             onClick={remove}
-            className="ml-auto text-sm text-red-600 hover:underline"
+            className="ml-auto text-xs text-red-500 hover:text-red-700 hover:underline font-medium"
           >
             Delete
           </button>

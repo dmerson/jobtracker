@@ -14,84 +14,62 @@ export default function InterviewsSection({
   };
 
   return (
-    <div className="rounded-lg border border-zinc-200 bg-white p-6">
-      <h2 className="text-lg font-semibold text-zinc-900">Interview Notes</h2>
+    <div className="li-card">
+      <p className="li-section-title">Interview Notes</p>
 
-      <div className="mt-4 space-y-3">
+      <div className="p-4">
         {interviews.length === 0 && (
-          <p className="text-sm text-zinc-500">No interviews logged yet.</p>
+          <p className="text-sm text-black/40">No interviews logged yet.</p>
         )}
-        {interviews.map((interview) => {
-          const remove = async () => {
-            "use server";
-            await deleteInterview(jobId, interview.id);
-          };
-          return (
-            <div
-              key={interview.id}
-              className="rounded-md border border-zinc-200 p-4"
-            >
-              <div className="flex items-center justify-between">
-                <p className="text-sm font-medium text-zinc-900">
-                  {interview.round_type || "Interview"}
-                  {interview.interview_date && (
-                    <span className="ml-2 text-zinc-500">
-                      {interview.interview_date}
-                    </span>
-                  )}
-                </p>
-                <form action={remove}>
-                  <button className="text-xs text-red-600 hover:underline">
-                    Delete
-                  </button>
-                </form>
-              </div>
-              {interview.interviewers && (
-                <p className="mt-1 text-sm text-zinc-600">
-                  With: {interview.interviewers}
-                </p>
-              )}
-              {interview.notes && (
-                <p className="mt-2 whitespace-pre-wrap text-sm text-zinc-700">
-                  {interview.notes}
-                </p>
-              )}
-            </div>
-          );
-        })}
-      </div>
 
-      <form action={add} className="mt-4 space-y-3 border-t border-zinc-200 pt-4">
-        <div className="grid grid-cols-3 gap-3">
-          <input
-            name="round_type"
-            placeholder="Round (e.g. Phone Screen)"
-            className="rounded-md border border-zinc-300 px-3 py-2 text-sm"
-          />
-          <input
-            name="interview_date"
-            type="date"
-            className="rounded-md border border-zinc-300 px-3 py-2 text-sm"
-          />
-          <input
-            name="interviewers"
-            placeholder="Interviewer(s)"
-            className="rounded-md border border-zinc-300 px-3 py-2 text-sm"
-          />
+        <div className="space-y-3">
+          {interviews.map((interview) => {
+            const remove = async () => {
+              "use server";
+              await deleteInterview(jobId, interview.id);
+            };
+            return (
+              <div key={interview.id} className="rounded-lg border border-black/10 bg-[#F3F2EF] p-4">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <p className="text-sm font-semibold text-black/90">
+                      {interview.round_type || "Interview"}
+                      {interview.interview_date && (
+                        <span className="ml-2 font-normal text-black/50">
+                          {new Date(interview.interview_date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                        </span>
+                      )}
+                    </p>
+                    {interview.interviewers && (
+                      <p className="mt-0.5 text-xs text-black/50">With: {interview.interviewers}</p>
+                    )}
+                  </div>
+                  <form action={remove}>
+                    <button className="text-xs text-red-500 hover:text-red-700 hover:underline">Remove</button>
+                  </form>
+                </div>
+                {interview.notes && (
+                  <p className="mt-2 whitespace-pre-wrap text-sm text-black/75">{interview.notes}</p>
+                )}
+              </div>
+            );
+          })}
         </div>
-        <textarea
-          name="notes"
-          rows={3}
-          placeholder="Notes..."
-          className="w-full rounded-md border border-zinc-300 px-3 py-2 text-sm"
-        />
-        <button
-          type="submit"
-          className="rounded-md border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50"
-        >
-          Add Interview
-        </button>
-      </form>
+
+        {/* Add form */}
+        <form action={add} className="mt-4 space-y-3 border-t border-black/[.06] pt-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-black/40">Log an interview</p>
+          <div className="grid grid-cols-3 gap-3">
+            <input name="round_type" placeholder="Round (e.g. Phone Screen)" className="li-input" />
+            <input name="interview_date" type="date" className="li-input" />
+            <input name="interviewers" placeholder="Interviewer(s)" className="li-input" />
+          </div>
+          <textarea name="notes" rows={3} placeholder="Notes..." className="li-input resize-y" />
+          <button type="submit" className="li-btn li-btn-secondary">
+            Add Interview
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
